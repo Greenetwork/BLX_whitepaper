@@ -18,7 +18,17 @@
 
 %\geometry{showframe}% for debugging purposes -- displays the margins
 \usepackage{draftwatermark}
-\SetWatermarkLightness{0.9}
+\SetWatermarkLightness{0.95}
+
+\usepackage{ifluatex}
+\ifluatex
+  \usepackage{pdftexcmds}
+  \makeatletter
+  \let\pdfstrcmp\pdf@strcmp
+  \let\pdffilemoddate\pdf@filemoddate
+  \makeatother
+\fi
+\usepackage{svg}
 
 \usepackage{amsmath}
 \usepackage{caption}
@@ -33,9 +43,9 @@
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 \graphicspath{{graphics/}}
 
-\title{{\large Basin Logix: Groundwater Management Networks
-%\thanks{June, 2020 \break University of Copenhagen \break Professor Graham Fogg \break Dr. %Steven Carle \break}
-}}
+\title[{\includesvg[height=1cm]{basinlogixiconlogo.svg}}]{
+\includesvg[height=1cm]{basinlogixfulllogo.svg} \\
+\large Groundwater Management Networks}
 
 \author[Spencer Harris, spencerbh@basinlogix.com]{{\scriptsize Spencer Harris, spencerbh@basinlogix.com \break Abdel Alfahham, alfahham@basinlogix.com}}
 
