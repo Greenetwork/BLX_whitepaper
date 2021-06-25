@@ -30,6 +30,9 @@
 \fi
 \usepackage{svg}
 
+
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-}
 \usepackage{amsmath}
 \usepackage{caption}
 \usepackage{floatrow}
@@ -103,61 +106,78 @@ Increasing climate pressure with the primary contributor being global warming an
 
 Market pressures, namely the increase in high-value crops and the increase in urban population are both driving the price per acre-foot\footnote{An acre-foot of water is the volume of water equivalent volume of one acre of surface area to a depth of one foot.} of water continuously higher each year. Continuously higher prices for surface water deliveries (est. 31\% increase in the past 5 years)\cite{value} has many stakeholders utilizing groundwater extraction as a mitigation strategy to combat market pressures. With SGMA potentially reducing the ability of stakeholders to utilize groundwater as a safety net for their water supply they are looking for alternative strategies. Organizations like the CME group are now beginning to supply some alternatives (futures market). Additionally, hedge-funds tied to university endowments\cite{harvard} and famous short sellers\cite{burry} have been making direct investments in California agriculture and by indirect extension California water for some years now.
 
-What is needed is a new avenue for uncertainty mitigation: a governance and trading platform enacted on a permissioned blockchain to act as a trusted third party between stakeholders. 
+What is needed is a new avenue for uncertainty mitigation: \break A governance and trading platform enacted on a permissioned blockchain to act as a trusted third party between stakeholders. 
 
 \subsection{Platform}\label{sec:headings}
 
 Basin Logix is a platform for the commoditization of groundwater, a currently underserved resource in a growing market. The project aims to create revenue and positive impact by providing trustless tools to manage uncertainty surrounding groundwater supplies. 
 
-The platform will be involved with managing real-world assets. Because there are potentially unknown implications of managing tangible assets on a blockchain and there are large known risks of public blockchains, the Basin Logix network will be a permissioned blockchain. 
+The platform will be involved with managing real-world assets. Because there are potentially unknown implications of managing tangible physical assets on a blockchain and there are large known risks of public blockchains, the Basin Logix network will be a permissioned blockchain.
 
-Trustlessness is an important feature of the platform, from our prior customer interviews performed in 2017 we concluded that agricultural stakeholders are distrusting of most forms of government and distrustful of their peers. A platform providing trustless guarantees on the tools of peer-to-peer trading and collective resource governance would be seen as a desirable option for stakeholders. 
+Trustlessness is an important feature of the platform, from our prior customer interviews performed in 2017 we concluded that agricultural stakeholders are distrusting of most forms of government and distrustful of their peers. A platform providing trustless guarantees on the tools of peer-to-peer trading and collective resource governance are a desirable option for stakeholders. 
 
-Transparency is an important feature of the platform, from our prior customer interviews, we concluded that auditability and transparency are valuable features for a regulatory or legal stakeholder. The Basin Logix platform is built on substrate\footnote{https://www.substrate.io/}, metadata on the state of the network and the ability to query the chain for a history of transactions is built into substrate and its associated toolset out of the box.   
+Transparency is an important feature of the platform, from our prior customer interviews, we concluded that auditability and transparency are valuable features for a regulatory or legal stakeholder. The Basin Logix platform is built on substrate\footnote{https://www.substrate.io/}, metadata on the state of the network and the ability to query the chain for a history of transactions is built into substrate and its associated toolset out of the box. Due to the nature of the platform and its network, transparency and privacy need not be at odds. For accounts to meet compliance requirements, selective disclosure will be implemented so that regulators will be limited to only accessing the minimum amount of information required to verify an account's compliance requirements.   
 
-On platform transfer of value is another reason why Basin Logix is a good solution to the current pain point that stakeholders' have, trading water is complicated. By commoditizing groundwater into digital assets (Non Fungible Tokens) the value associated with the digital asset travels alongside the information. Because the platform will create value tied to information, conversion into different types of value, for example a cryptocurrency, will require fewer steps and offer more guarantees than a traditional value transfer where the information and value are seperate.
 
-The Basin Logix platform currently consists of a substrate-based development blockchain, a PostgreSQL database, a rust backend, and a javascript frontend. The platform is described in the following sections not by the tech stack, but by the data on the platform and the possible actions afforded by that data. The design presented below will most certainly change as Basin Logix continues to iteratively develop the platform with input from multi-disciplinary insights. Additionally, Basin Logix will continue to develop and modify the runtime (state transition function) of the blockchain network via forkless upgrades, a feature of the substrate framework.
+On platform transfer of value is another reason why Basin Logix is a good solution to the current pain point that stakeholders' have, trading water is complicated. By commoditizing groundwater into digital assets the value associated with the digital asset travels alongside the information. Because the platform will create value tied to information, conversion into different types of value, for example a cryptocurrency, will require fewer steps and offer more guarantees than a traditional value transfer where the information and value are separate. The benefits of tying value to information are also relevant when trading water across a basin or interacting with surface water infrastructure as is the case for managed aquifer recharge\footnote{Managed Aquifer Recharge (MAR) is defined as the intentional
+banking and treatment of waters in aquifers} and water banking. Digital assets on Basin Logix will maintain a history of provenance and exchange, thereby allowing the stakeholders via on-chain governance to constrain certain trades or actions that may lead to undesirable results as identified by SGMA\footnote{
+\begin{enumerate}
+  \item Chronic lowering of groundwater levels indicating a significant and unreasonable depletion of supply
+  \item Significant and unreasonable reduction of groundwater storage
+  \item Significant and unreasonable seawater intrusion
+  \item Significant and unreasonable degradation of water quality
+  \item Significant and unreasonable land subsidence
+  \item Groundwater-related surface water depletions that have significant and unreasonable adverse impacts on beneficial uses of surface water
+\end{enumerate}
+}.   
+
+The Basin Logix platform consists of a substrate-based development blockchain, a PostgreSQL database, a rust backend, and a javascript frontend. The platform is described in the following sections not by the tech stack, but by the data on the platform and the possible actions afforded by that data. The design presented below will most certainly change as Basin Logix continues to iteratively develop the platform with input from multi-disciplinary insights. Additionally, Basin Logix will continue to develop and modify the runtime (state transition function) of the blockchain network via forkless upgrades, a feature of the substrate framework.
 
 
 \newthought{DATA}:
 
 Data on the Basin Logix platform will take two forms, off-chain data and on-chain data. Data does not have to be mutually exclusive to either form, but the distinction is beneficial to explain the types of guarantees the platform can make by way of on-chain data and the limitations of these guarantees. 
 
-On-chain data refers to data which will be explicitly stored on the blockchain or data which can be extracted by querying the blockchain (transactional metadata). On-chain data will be universally accessible and accepted by the members of the platform. This tenet of on-chain data coupled with open source code and a permissioned blockchain structure forms the basis for providing certain platform actions guarantees.
+On-chain data refers to data which will be explicitly stored on the blockchain or data which can be extracted by querying the blockchain (transactional metadata). On-chain data will be universally accepted by the members of the platform. This tenet of on-chain data coupled with open source code and a permissioned blockchain structure forms the basis for providing certain platform action guarantees.
 
-Data explicitly stored on-chain will consist of: Accounts: Owner (User-Account); Assessor's Parcel Number Account (APN-Account) anonymous proxy account of User-Account; Pumping wells (Well-Account) anonymous proxy account of APN-Account; and Groundwater allocation balances of the utility token (AC-FT or gallons)\footnote{Utility tokens will be digital representations of volumes of water.}. 
+Data explicitly stored on-chain will consist of: Accounts: Owner (User-Account); Assessor's Parcel Number Account (APN-Account) anonymous proxy account of User-Account; Pumping wells (Well-Account) anonymous proxy account of APN-Account; and Groundwater allocation balances of the utility token (AC-FT or gallons)\footnote{Utility tokens will be digital representations of actual physical volumes of water.}. 
 
 Data retrievable by querying chain's history (blocks): Transactions; Trades/Auction Results: APN-Accounts involved, amount transferred, price paid, time executed; Leasing agreements (land fallowing agreements, intra-basin/inter-APN-Account agreements): APN-Accounts involved, amount of utility tokens associated with lease, compensation paid, time executed, duration of lease, etc; Allocation usage per APN: allocation balance of utility tokens over time; Governance decisions: Allocation scheme selection, Cap reduction scheme selection; and Price: Compiled data from transactions.
 
-The Basin Logix team are experts in consolidating, organizing and cleaning publicly available water data from all over the world. The platform will begin with publicly available water data from state and county level resources. Ultimately Basin Logix will provide hardware for stakeholders to install on location. Infrastructure hardware will serve the dual purpose of collecting utility token usage data via sensors (groundwater pumping/water metering) and serving as nodes for the blockchain. The Basin Logix team has experience in deploying and maintaining large sensor networks.
+Off-chain data will consist of: geographic locations of APN-Accounts; details of land usage; details of allocation schemes\footnote{Allocation schemes - How and when will the available groundwater the basin be divided amongst APN-accounts.} and code; and details of cap reduction schemes\footnote{Cap reduction schemes - How and when will the available groundwater of the basin be adjusted in order to meet sustainable yield targets.} and code.
 
-Off-chain data will consist of: geographic locations of APN-Accounts; details of land usage; allocation schemes details and code; and cap reduction schemes and code.
+The Basin Logix team are experts in consolidating, organizing and cleaning publicly available water data from all over the world. The platform is beginning with publicly available land, water and agricultural data from state and county level resources. Ultimately Basin Logix will provide hardware for stakeholders to install on location. Infrastructure hardware will serve the dual purpose of collecting utility token usage data via sensors (groundwater pumping/water metering) and serving as decentralized nodes for the blockchain component of the platform. The Basin Logix team has experience in deploying and maintaining large sensor networks.
 
 \newthought{ACTIONS}:
 
 	Actions on the Basin Logix platform will involve both on-chain data and off-chain data. \break 
 
 Registration of land via APNs \break
-Stakeholders will register their land parcels on the platform. Land parcels will be represented as APN-Accounts. User-Accounts will be able to control N APN-Accounts. APN-Accounts will be denoted by their unique APN numbers. Stakeholders will be able to visually confirm that the APN-Account they are registering is geographically correct. 
+Stakeholders will register their land parcels on the platform. Land parcels will be represented as APN-Accounts. User-Accounts will be able to control N APN-Accounts. APN-Accounts will be denoted by their unique APN numbers. Stakeholders will be able to visually confirm that the APN-Account they are registering is geographically correct via data compiled by the Basin Logix team and displayed on a map interface. 
+
+Allocation scheme and Cap reduction scheme selection \break
+Allocation scheme selection will involve on-chain voting on different scheme types to determine how and when groundwater allocations of the utility token will be calculated. Potential options include: based on prior usage, based on total acreage, based on total acreage irrigated, etc as well as a selection of the frequency of when allocations will be disbursed. The applied allocation scheme will not be limited to a single exclusive option. Based on the on-chain voting multiple allocation schemes can be combined together to achieve the most equitable scheme. Cap reduction scheme selection will involve on-chain voting on different scheme types to determine how and when the total available groundwater of the basin will be adjusted in order to meet sustainable yield targets. Potential cap reduction scheme options will vary in percent reduction and timeline along which the reductions will occur. 
+
+Allocation disbursement via APNs \break
+Basin managers\footnote{Groundwater Sustainability Agencies in the case of SGMA} will be able to disburse groundwater allocations of the utility token to all APN-Accounts on the platform according to allocation schemes voted on and approved by the stakeholders on the network. Alternatively this could happen programmatically upon the conclusion of the allocation scheme and cap reduction scheme selection process via smart contracts. 
 
 Random candle auctions for utility tokens \break
 Hidden candle water (utility token) auctions will be performed on regular time intervals. Hidden candle auctions\cite{candle} will involve a pool of utility tokens being auctioned off to interested bidders. The bids will be accepted during a specified time period, but the auction will end at a random time during that specified time period. This will be the primary mechanism through which the value of groundwater within a given basin will be determined. 
 
-This auction method will also supply stakeholders with their basin's historical valuation of water which will help the bidders make rational bids (choices), as bids are only rational when compared to previous bids\cite{Allingham}. There will be no straight trading. This is a deliberate market design choice to protect small stakeholders\cite{Raffensperger}. If everyone bids instead of trades directly with one another the market will be more accurate (with accuracy being measured by the market's ability to find the true price of water).\break
+This auction method will also supply stakeholders with their basin's historical valuation of water which will help the bidders make rational bids (choices), as bids are only rational when compared to previous bids\cite{Allingham}. There will be no straight trading. This is a deliberate market design choice to protect small stakeholders\cite{Raffensperger}. If everyone bids, instead of trades directly with one another, the market will be more accurate, where accuracy is measured by the market's ability to find the true price of water.\break
 
 Allocation leasing \break
 Allocation leasing will entail the leasing of an APN-Account's allocation or sub-set of it's allocation to another APN-Account for a specified amount of time for a specified price.\break
 
 Behavior based incentives \break
-Incentives surrounding fallowing or other types of beneficial behaviors can combine some kind of compensation for usage of utility tokens (water) for fallowing or environmental application\cite{tule}. On-chain history showing a utility tokens being transferred from APN-Accounts to other behavior specific accounts will assist in potential water rights issues (use it or lose it scenarios) because fallowing and environmental applications are now clearly defined active uses.\break
+Incentives surrounding fallowing or other types of beneficial behaviors can combine some kind of compensation for usage of utility tokens (water) for fallowing or environmental application\cite{tule}. On-chain history showing a utility tokens being transferred from APN-Accounts to other behavior specific accounts will assist in potential water rights issues (use it or lose it scenarios) because fallowing and environmental applications are now clearly defined consumptive uses.\break
 
 Tiered management \break
 Management of APN-Accounts and their respective balances of utility tokens can be assumed by water/irrigation district managers or be partially managed by Groundwater Sustainability Agencies for particular actions. Multi-signature controlled accounts and a variety of action specific proxy account relationships\cite{proxy} can allow for existing complex management structures to be recreated on the Basin Logix platform.\break 
 
 \subsection{Network Sustainability}\label{sec:headings}
 
- The structure of the network will be influenced by the needs of the stakeholders. The structure of the entity operating the Basin Logix network may take the shape of a Decentralized Autonomous Organization (DAO), a traditional corporation or something entirely different. Regardless of the structure of the network, creation of revenue is required in order to operate. Each time an allocation is created, thereby creating value, a small percentage of it will be apportioned to a communal pool of utility tokens, or a water bank. The water bank will be utilized as a market maker. All revenue generated by the water bank will be distributed to the entities operating the Basin Logix network. By sourcing value capture for the entities operating the network from the value creation of commodification of groundwater, sustainability of the network will be tied to the value the network provides the stakeholders. 
+ The structure of the network will be influenced by the needs of the stakeholders. The structure of the entity operating the Basin Logix network may take the shape of a Decentralized Autonomous Organization (DAO), a traditional corporation or something entirely different. Regardless of the structure of the network, creation of revenue is required in order to operate. Each time an allocation is created, thereby creating value, a small percentage of it will be apportioned to a communal pool of utility tokens, or a water bank. With these utility tokens the water bank will provide liquidity as a market maker to the basin. Revenue generated by the water bank will be distributed to the entities operating the Basin Logix network. By sourcing value capture for the entities operating the network from the value creation of commodification of groundwater, sustainability of the network will be tied to the value the network provides the stakeholders. 
 
 \subsection{Discussion}\label{sec:headings}
 
